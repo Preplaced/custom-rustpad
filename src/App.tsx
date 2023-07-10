@@ -168,18 +168,8 @@ function App() {
       bgColor={darkMode ? "#1e1e1e" : "white"}
       color={darkMode ? "#cbcaca" : "inherit"}
     >
-      <Box
-        flexShrink={0}
-        bgColor={darkMode ? "#333333" : "#e8e8e8"}
-        color={darkMode ? "#cccccc" : "#383838"}
-        textAlign="center"
-        fontSize="sm"
-        py={0.5}
-      >
-        Rustpad
-      </Box>
       <Flex flex="1 0" minH={0}>
-        <Container
+        {/* <Container
           w="xs"
           bgColor={darkMode ? "#252526" : "#f3f3f3"}
           overflowY="auto"
@@ -288,7 +278,7 @@ function App() {
           >
             Read the code
           </Button>
-        </Container>
+        </Container> */}
         <Flex flex={1} minW={0} h="100%" direction="column" overflow="hidden">
           <HStack
             h={6}
@@ -299,11 +289,28 @@ function App() {
             px={3.5}
             flexShrink={0}
           >
-            <Icon as={VscFolderOpened} fontSize="md" color="blue.500" />
+            {/* <Icon as={VscFolderOpened} fontSize="md" color="blue.500" />
             <Text>documents</Text>
             <Icon as={VscChevronRight} fontSize="md" />
             <Icon as={VscGist} fontSize="md" color="purple.500" />
-            <Text>{id}</Text>
+            <Text>{id}</Text> */}
+            <p>
+              Language:
+            </p>
+            <Select
+              maxWidth={"15rem"}
+              size="sm"
+              bgColor={darkMode ? "#3c3c3c" : "white"}
+              borderColor={darkMode ? "#3c3c3c" : "white"}
+              value={language}
+              onChange={(event) => handleChangeLanguage(event.target.value)}
+            >
+              {languages.map((lang) => (
+                <option key={lang} value={lang} style={{ color: "black" }}>
+                  {lang}
+                </option>
+              ))}
+            </Select>
           </HStack>
           <Box flex={1} minH={0}>
             <Editor
@@ -318,7 +325,7 @@ function App() {
           </Box>
         </Flex>
       </Flex>
-      <Footer />
+      {/* <Footer /> */}
     </Flex>
   );
 }
