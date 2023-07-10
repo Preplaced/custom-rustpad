@@ -1,0 +1,26 @@
+name: Dev Release Latest
+
+on: workflow_dispatch
+
+jobs: 
+  build: 
+    runs-on: ubuntu-latest
+
+    steps:
+        - uses: actions/checkout@v1
+        - name: Install doctl 
+          uses: digitalocean/action-doctl@v2
+          with:
+            token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        - name: Login To Registry
+          run: doctl registry login
+        - name: Build the latest Docker image
+          run: docker build . --file Dockerfile --tag registry.digitalocean.com/preplaced/dev/rust-pad:latest
+        - name: Push the latest Docker image
+          run: docker push registry.digitalocean.com/preplaced/dev/rust-pad:latest
+        - name: Save DigitalOcean kubeconfig with short-lived credentials
+          run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 dev-preplaced
+        - name: Deploy to DigitalOcean Kubernetes
+          run: kubectl rollout restart deployment rust-pad
+        - name: Verify deployment
+          run: kubectl rollout status  deployment rust-pad
