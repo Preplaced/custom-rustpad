@@ -288,12 +288,14 @@ function App() {
             fontSize="13px"
             px={3.5}
             flexShrink={0}
+            className="space-out"
           >
             {/* <Icon as={VscFolderOpened} fontSize="md" color="blue.500" />
             <Text>documents</Text>
             <Icon as={VscChevronRight} fontSize="md" />
             <Icon as={VscGist} fontSize="md" color="purple.500" />
             <Text>{id}</Text> */}
+            <div className="flex-start-center">
             <p>
               Language:
             </p>
@@ -311,6 +313,8 @@ function App() {
                 </option>
               ))}
             </Select>
+            </div>
+            <ConnectionStatus darkMode={darkMode} connection={connection} />
           </HStack>
           <Box flex={1} minH={0}>
             <Editor
